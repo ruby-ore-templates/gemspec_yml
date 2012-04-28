@@ -1,0 +1,41 @@
+name: <%= @name %>
+summary: <%= yaml_escape @summary %>
+description: <%= yaml_escape @description %>
+<%- if @license -%>
+license: <%= @license %>
+<%- end -%>
+<%- if @authors.length > 1 -%>
+authors:
+<%-   @authors.each do |name| -%>
+ - <%= name %>
+<%-   end -%>
+<%- else -%>
+authors: <%= @authors.first %>
+<%- end -%>
+<%- if @email -%>
+email: <%= @email %>
+<%- end -%>
+homepage: <%= @homepage %>
+<%= includes :gemspec, '' -%>
+<%- unless @dependencies.empty? -%>
+
+dependencies:
+<%-   @dependencies.each do |name,version| -%>
+  <%= name %>: <%= version %>
+<%-   end -%>
+<%- end -%>
+
+<%- if bundler? -%>
+development_dependencies:
+  bundler: <%= @development_dependencies['bundler'] %>
+  <%- if yard? -%>
+  yard: <%= @development_dependencies['yard'] %>
+  <%- end -%>
+<%- else -%>
+<%-   unless @development_dependencies.empty? -%>
+development_dependencies:
+<%-     @development_dependencies.each do |name,version| -%>
+  <%= name %>: <%= version %>
+<%-     end -%>
+<%-   end -%>
+<%- end -%>
