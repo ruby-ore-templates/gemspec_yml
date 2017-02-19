@@ -79,4 +79,8 @@ Gem::Specification.new do |gem|
       gem.add_development_dependency(name,split[versions])
     end
   end
+<%- if yard? -%>
+
+  gem.metadata['yard.run']='yri'
+<%- end -%>
 end

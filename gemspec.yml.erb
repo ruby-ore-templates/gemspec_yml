@@ -21,13 +21,13 @@ homepage: <%= @homepage %>
 
 dependencies:
 <%-   @dependencies.sort.each do |name,version| -%>
-  <%= name %>: <%= version %>
+  <%= name %>: "<%= version %>"
 <%-   end -%>
 <%- end -%>
 
 <%- unless @development_dependencies.empty? -%>
 development_dependencies:
 <%-   @development_dependencies.sort.each do |name,version| -%>
-  <%= name %>: <%= version %>
+  <%= name %>: "<%= version %>"
 <%-   end -%>
 <%- end -%>
